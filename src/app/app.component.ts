@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { ListaDeCompraService } from './service/lista-de-compra.service';
 import { Item } from './interfaces/iItem';
 
@@ -20,5 +20,15 @@ export class AppComponent implements OnInit {
 
   editarItem(item: Item) {
     this.itemParaSerEditado = item;
+  }
+
+  deletarItem(id: number) {
+    const index = this.listaDeCompras.findIndex((item) => item.id == id);
+    this.listaDeCompras.splice(index, 1);
+  }
+
+  limparLista(){
+    this.listaService.limparLocalStorage();
+    this.listaDeCompras = [];
   }
 }
